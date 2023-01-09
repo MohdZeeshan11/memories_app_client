@@ -16,8 +16,8 @@ const Post = ({post,setCurrentId}) => {
 
     const deletePostHandler = async (id)=>{
         try {
-            const resp = await axios.delete(`http://localhost:5000/post/${id}`);
-            console.log('resp delete =',resp.data.deletePost._id);
+            const resp = await axios.delete(`https://memories-app-server-nine.vercel.app/post/${id}`);
+            // console.log('resp delete =',resp.data.deletePost._id);
             dispatch({
                 type:DELETE_POST,
                 payload:resp.data.deletePost._id
@@ -29,7 +29,7 @@ const Post = ({post,setCurrentId}) => {
 
     const likePostHandler = async (id)=>{
         try {
-            const resp = await axios.patch(`http://localhost:5000/post/${id}/likePost`);
+            const resp = await axios.patch(`https://memories-app-server-nine.vercel.app/post/${id}/likePost`);
             dispatch({
                 type:LIKE_POST,
                 payload:resp.data

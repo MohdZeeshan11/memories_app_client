@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const Posts = ({setCurrentId}) => {
   const postList = useSelector((state) => state.postData);
-  console.log("reduce ",postList);
+  // console.log("reduce ",postList);
   const classes = useStyles();
   return (
     <>{postList.length===0?<CircularProgress />:

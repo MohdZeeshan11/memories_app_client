@@ -17,8 +17,8 @@ function App() {
 
   const getAllposts = async ()=>{
     try {
-        const resp = await axios.get('http://localhost:5000/post');
-        console.log('resp =',resp.data.posts);
+        const resp = await axios.get('https://memories-app-server-nine.vercel.app/post');
+        // console.log('resp =',resp.data.posts);
         dispatch({
           type:GET_ALL_POSTS,
           payload: resp.data.posts

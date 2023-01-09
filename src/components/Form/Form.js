@@ -18,7 +18,7 @@ const Form = ({currentId,setCurrentId}) => {
     const dispatch = useDispatch();
     const {classes} = useStyles();
 
-    console.log('currentId = ',currentId);
+    // console.log('currentId = ',currentId);
 
     const getValueForInput = (incoming) => {
         let value;
@@ -44,7 +44,7 @@ const Form = ({currentId,setCurrentId}) => {
 
         if(currentId){
             try {
-                const resp = await axios.patch(`http://localhost:5000/post/${currentId}`,postData);
+                const resp = await axios.patch(`https://memories-app-server-nine.vercel.app/post/${currentId}`,postData);
                 console.log('updatedPost = ',resp)
                 dispatch({
                     type:UPDATE_POST,
@@ -55,7 +55,7 @@ const Form = ({currentId,setCurrentId}) => {
             }
         }else{
             try {
-                const resp = await axios.post('http://localhost:5000/post',postData);
+                const resp = await axios.post('https://memories-app-server-nine.vercel.app/post',postData);
                 dispatch({
                     type:CREATE_POST,
                     payload:resp.data,
@@ -77,7 +77,7 @@ const Form = ({currentId,setCurrentId}) => {
 
       const getAllposts1 = async (currentId)=>{
         try {
-            const resp = await axios.get('http://localhost:5000/post');
+            const resp = await axios.get('https://memories-app-server-nine.vercel.app/post');
             const singlePost = resp.data.posts.filter((post)=> post._id === currentId);
             setPostData(...singlePost);
         } catch (error) {
