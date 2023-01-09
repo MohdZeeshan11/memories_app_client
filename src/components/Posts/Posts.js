@@ -12,7 +12,7 @@ const Posts = ({setCurrentId}) => {
     <>{postList.length===0?<CircularProgress />:
     (
       <Grid className={classes.container} container alignItems="stretch" spacing={3} >
-        {postList.reverse().map((post)=>
+        {postList.map((post)=>
           <Grid key={post._id} item xs={12} sm={6}>
             <Post post={post} setCurrentId={setCurrentId} />
           </Grid>

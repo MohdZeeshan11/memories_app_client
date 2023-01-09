@@ -45,7 +45,7 @@ const Form = ({currentId,setCurrentId}) => {
         if(currentId){
             try {
                 const resp = await axios.patch(`https://memories-app-server-nine.vercel.app/post/${currentId}`,postData);
-                console.log('updatedPost = ',resp)
+                // console.log('updatedPost = ',resp)
                 dispatch({
                     type:UPDATE_POST,
                     payload:resp.data.updatePost,
