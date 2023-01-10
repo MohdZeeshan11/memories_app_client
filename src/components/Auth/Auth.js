@@ -5,11 +5,11 @@ import { useStyles } from './styles';
 import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {useDispatch} from 'react-redux';
-import axios from 'axios';
 // import Icon from './icon';
 import { gapi } from 'gapi-script';
 import { AUTH } from '../../redux/actionTypes';
 import { useNavigate } from 'react-router-dom';
+import { signin, signup } from '../../redux/actions/auth';
 // clientId = "548511602786-k0qm1cibhns8p0hd689q1uo10js0mfur.apps.googleusercontent.com"
 // seceretKey="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"
 
@@ -32,44 +32,13 @@ const Auth = () => {
         setShowPassword(false);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+    
         if (isSignup) {
-            if(formData.password !== formData.confirmPassword){
-                console.log(formData.password !== formData.confirmPassword);
-                setIsEqual(false);
-                return ;
-            }
-            try {
-                const resp = await axios.post('https://memories-app-server-4apt.vercel.app/user/signUp',formData);
-                dispatch({
-                    type:AUTH,
-                    payload:resp.data
-                })   
-                navigate('/home');
-            } catch (error) {
-                console.log(error);
-                alert('user already exist')
-            }
+          dispatch(signup(formData, navigate));
         } else {
-                try{
-                    const resp = await axios.post('https://memories-app-server-4apt.vercel.app/user/signIn',formData);
-                    console.log('response =',resp);
-                    if (resp?.data?.success) {
-                        dispatch({
-                            type:AUTH,
-                            payload:resp.data
-                        })   
-                        navigate('/home');
-                    } 
-                }catch(error){
-                    console.log(error);
-                    if(error.response.status===404)
-                    alert('user does not exist')
-                    else{
-                        alert('password is not correct');
-                    }
-                }
+          dispatch(signin(formData, navigate));
         }
       };
     
@@ -84,7 +53,7 @@ const Auth = () => {
         const token = res?.tokenId;
         try {
             dispatch({ type: AUTH, payload: { user, token } });
-            navigate('/home');
+            navigate('/');
         } catch (error) {
             console.log(error);
         }

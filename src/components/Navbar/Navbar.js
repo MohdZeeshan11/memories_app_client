@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { AppBar, Avatar, Button, Container, Toolbar, Typography } from '@mui/material';
+import { AppBar, Avatar, Button, Toolbar,Box, Typography } from '@mui/material';
 import Logo from '../../assets/memories.jpeg';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate,Link } from 'react-router-dom';
 import { useStyles } from './styles';
 import { useDispatch } from 'react-redux';
 import { LOGOUT } from '../../redux/actionTypes';
@@ -17,40 +17,51 @@ const Navbar = () => {
 
     const logout = () => {
         dispatch({ type: LOGOUT });
-        navigate('/');
+        navigate('/auth');
         setUser(null);
     };
 
     useEffect(() => {
         const token = user?.token;
+    
         if (token) {
           const decodedToken = decode(token);
+    
           if (decodedToken.exp * 1000 < new Date().getTime()) logout();
         }
         setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location]); 
-
+        // eslint-disable-next-line 
+    }, [location]);
   return (
-    <Container>
-        <AppBar className={classes.appBar} position="static" color="inherit">
-            {/* <Typography variant='h2' className={classes.heading} align='center'  >MEMORIES</Typography> */}
-            <div className={classes.brandContainer}>
-                <Typography to="/home" className={classes.heading} variant="h2" align="center" sx={{fontSize:{xs:'30px',md:'50px'}}} >Memories</Typography>
-                <img className={classes.image} src={Logo} alt="icon" height="60" />
-            </div>
-            <Toolbar className={classes.toolbar}>
-                {user?.user ? (
-                <div className={classes.profile}>
-                    <Avatar className={classes.purple} alt={user?.user?.name} src={user?.user?.imageUrl}>{user?.user?.name?.charAt(0)}</Avatar>
-                    <Typography className={classes.userName} variant="h6">{user?.user?.name}</Typography>
-                    <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
-                </div>
-                ) : (
-                <Button to="/" variant="contained" color="primary" onClick={()=>navigate('/')}>Sign In</Button>
-                )}
-            </Toolbar>
-        </AppBar>
-    </Container>
+    <AppBar className={classes.appBar} position="static" color="inherit">
+      <div className={classes.brandContainer}>
+        <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center" sx={{fontSize:{xs:'28px',md:'50px'},marginLeft:{xs:'-15px'}}}>Memories</Typography>
+        <Box ml={1}  sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <img className={classes.image} src={Logo} alt="icon" height="60"  />
+        </Box>
+      </div>
+      <Toolbar className={classes.toolbar} sx={{marginRight:{xs:'-40px'}}}>
+        {user?.result ? (
+          <div className={classes.profile}>
+            <Avatar 
+              className={classes.purple} 
+              alt={user?.result.name} 
+              src={user?.result.imageUrl}
+              onClick={logout}
+              style={{cursor:"pointer"}}
+              
+            >{user?.result.name.charAt(0)}</Avatar>
+           <Box ml={1}  sx={{ display: { xs: 'none', sm: 'block' } }}>
+           <Typography className={classes.userName} variant="h6"  mt={-1} >{user?.result?.name}</Typography>
+           <Typography className={classes.userName} variant="p" mt={-1}>{user?.result?.email}</Typography>
+           </Box>
+            {/* <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button> */}
+          </div>
+        ) : (
+          <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+        )}
+      </Toolbar>
+    </AppBar>
   )
 }
 

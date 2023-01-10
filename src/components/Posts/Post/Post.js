@@ -5,46 +5,13 @@ import moment from 'moment';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { DELETE_POST, LIKE_POST } from '../../../redux/actionTypes';
 import picture from '../../../assets/image1.png'
-import { headersProvider } from '../../../header';
+import { deletePost, likePost } from '../../../redux/actions/posts';
 
 const Post = ({post,setCurrentId}) => {
     const { classes } = useStyles();
     const dispatch = useDispatch();
-
-    const deletePostHandler = async (id)=>{
-        try {
-            const resp = await axios.delete(`https://memories-app-server-4apt.vercel.app/post/${id}`,{
-            // const resp = await axios.delete(`http://localhost:5000/post/${id}`,{
-                headers:headersProvider()
-            });
-            // console.log('resp delete =',resp.data.deletePost._id);
-            dispatch({
-                type:DELETE_POST,
-                payload:resp.data.deletePost._id
-            })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const likePostHandler = async (id)=>{
-        try {
-            // const resp = await axios.patch(`https://memories-app-server-nine.vercel.app/post/${id}/likePost`,{
-            const resp = await axios.patch(`https://memories-app-server-4apt.vercel.app/post/${id}/likePost`,{
-                headers:headersProvider()
-            });
-            dispatch({
-                type:LIKE_POST,
-                payload:resp.data
-            })
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
 
   return (
     <Card className={classes.card}>
@@ -68,11 +35,11 @@ const Post = ({post,setCurrentId}) => {
         <Typography variant="body2" color="textSecondary" component="p">{post?.message}</Typography>
         </CardContent>
         <CardActions className={classes.cardActions} >
-            <Button size="small" color="primary" onClick={()=>likePostHandler(post?._id)}> 
+            <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}> 
                 <ThumbUpAltIcon fontSize="smaall" />
                 &nbsp;Like &nbsp; {post.likeCount}
             </Button>
-            <Button size="small" color="primary" onClick={()=>deletePostHandler(post?._id)}> 
+            <Button size="small" color="primary" onClick={()=>dispatch(deletePost(post._id))}> 
                 <DeleteIcon fontSize="smaall" />
                 Delete
             </Button>

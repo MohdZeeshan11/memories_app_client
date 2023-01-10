@@ -21,12 +21,15 @@ export const useStyles = makeStyles()((theme) => ({
       toolbar: {
         display: 'flex',
         justifyContent: 'flex-end',
-        width: '400px',
+        // width: '400px',
       },
       profile: {
         display: 'flex',
-        justifyContent: 'space-between',
-        width: '400px',
+        // justifyContent: 'space-between',
+        // width: '400px',
+        justifyContent:"center",
+        alignItems:'center',
+      
       },
       userName: {
         display: 'flex',

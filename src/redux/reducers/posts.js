@@ -1,6 +1,6 @@
 import { CREATE_POST, DELETE_POST, GET_ALL_POSTS, LIKE_POST, UPDATE_POST } from "../actionTypes";
 
-const postData = (posts = [], action) => {
+const posts = (posts = [], action) => {
     switch (action.type) {
       case GET_ALL_POSTS:
         return action.payload;
@@ -17,4 +17,4 @@ const postData = (posts = [], action) => {
     }
 }
 
-export default postData;
+export default posts;
