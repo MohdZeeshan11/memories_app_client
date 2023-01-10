@@ -1,57 +1,21 @@
-// import logo from './logo.svg';
-import { AppBar, Container, Grid, Grow, Typography } from '@mui/material';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { Container } from '@mui/material';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
-import Logo from './assets/memories.jpeg';
-import Form from './components/Form/Form';
-import Posts from './components/Posts/Posts';
-import { GET_ALL_POSTS } from './redux/actionTypes';
-import { useStyles } from './styles';
+import Auth from './components/Auth/Auth';
+import Home from './components/Home/Home';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
-  const [currentId,setCurrentId] = useState(null);
-  const {classes} = useStyles();
-  const dispatch = useDispatch();
-
-  const getAllposts = async ()=>{
-    try {
-        const resp = await axios.get('https://memories-app-server-nine.vercel.app/post');
-        // console.log('resp =',resp.data.posts);
-        dispatch({
-          type:GET_ALL_POSTS,
-          payload: resp.data.posts
-        })
-    } catch (error) {
-        console.log(error.message);
-    }
-  }
-
-useEffect(()=>{
-  getAllposts()
-},[]);
-
-  // getAllposts();
   return (
-    <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography variant='h2' className={classes.heading} align='center' sx={{fontSize:{xs:'30px',md:'50px'}}} >MEMORIES</Typography>
-        <img src={Logo} alt="logo" width={60} className={classes.image}/>
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid   sx={{flexDirection:{xs:'column-reverse',sm:'row', md:'row'}}} container justify="space-between"  alignItems="stretch" spacing={3}>
-            <Grid item xs={12} sm={8}>
-              <Posts currentId={currentId} setCurrentId={setCurrentId} />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Form currentId={currentId} setCurrentId={setCurrentId}/>
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
-    </Container>
+    <BrowserRouter>
+      <Container maxWidth="lg">
+        <Navbar />
+        <Routes>
+          <Route path='/' exact element={<Auth />}/>
+          <Route path='/home' exact element={<Home />}/>
+        </Routes>
+      </Container>
+    </BrowserRouter>
   );
 }
 

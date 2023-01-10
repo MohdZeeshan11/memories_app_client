@@ -5,6 +5,7 @@ import FileBase from "react-file-base64";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { CREATE_POST, UPDATE_POST } from '../../redux/actionTypes';
+import { headersProvider } from '../../header';
 
 
 const Form = ({currentId,setCurrentId}) => {
@@ -44,7 +45,9 @@ const Form = ({currentId,setCurrentId}) => {
 
         if(currentId){
             try {
-                const resp = await axios.patch(`https://memories-app-server-nine.vercel.app/post/${currentId}`,postData);
+                const resp = await axios.patch(`https://memories-app-server-4apt.vercel.app/post/${currentId}`,postData,{
+                    headers:headersProvider()
+                });
                 // console.log('updatedPost = ',resp)
                 dispatch({
                     type:UPDATE_POST,
@@ -55,7 +58,9 @@ const Form = ({currentId,setCurrentId}) => {
             }
         }else{
             try {
-                const resp = await axios.post('https://memories-app-server-nine.vercel.app/post',postData);
+                const resp = await axios.post('https://memories-app-server-4apt.vercel.app/post',postData,{
+                    headers:headersProvider()
+                });
                 dispatch({
                     type:CREATE_POST,
                     payload:resp.data,
@@ -77,7 +82,7 @@ const Form = ({currentId,setCurrentId}) => {
 
       const getAllposts1 = async (currentId)=>{
         try {
-            const resp = await axios.get('https://memories-app-server-nine.vercel.app/post');
+            const resp = await axios.get('https://memories-app-server-4apt.vercel.app/post');
             const singlePost = resp.data.posts.filter((post)=> post._id === currentId);
             setPostData(...singlePost);
         } catch (error) {

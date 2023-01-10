@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { DELETE_POST, LIKE_POST } from '../../../redux/actionTypes';
 import picture from '../../../assets/image1.png'
+import { headersProvider } from '../../../header';
 
 const Post = ({post,setCurrentId}) => {
     const { classes } = useStyles();
@@ -16,7 +17,10 @@ const Post = ({post,setCurrentId}) => {
 
     const deletePostHandler = async (id)=>{
         try {
-            const resp = await axios.delete(`https://memories-app-server-nine.vercel.app/post/${id}`);
+            const resp = await axios.delete(`https://memories-app-server-4apt.vercel.app/post/${id}`,{
+            // const resp = await axios.delete(`http://localhost:5000/post/${id}`,{
+                headers:headersProvider()
+            });
             // console.log('resp delete =',resp.data.deletePost._id);
             dispatch({
                 type:DELETE_POST,
@@ -29,7 +33,10 @@ const Post = ({post,setCurrentId}) => {
 
     const likePostHandler = async (id)=>{
         try {
-            const resp = await axios.patch(`https://memories-app-server-nine.vercel.app/post/${id}/likePost`);
+            // const resp = await axios.patch(`https://memories-app-server-nine.vercel.app/post/${id}/likePost`,{
+            const resp = await axios.patch(`https://memories-app-server-4apt.vercel.app/post/${id}/likePost`,{
+                headers:headersProvider()
+            });
             dispatch({
                 type:LIKE_POST,
                 payload:resp.data
