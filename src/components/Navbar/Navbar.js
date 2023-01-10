@@ -11,7 +11,7 @@ const Navbar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     // console.log('userLoginData = ',user);
     const dispatch = useDispatch();
-    // const location = useLocation();
+    const location = useLocation();
     const navigate = useNavigate();
     const {classes} = useStyles();
 
@@ -28,7 +28,7 @@ const Navbar = () => {
           if (decodedToken.exp * 1000 < new Date().getTime()) logout();
         }
         setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [logout]); 
+    }, [location]); 
 
   return (
     <Container>

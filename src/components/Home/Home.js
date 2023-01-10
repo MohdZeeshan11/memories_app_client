@@ -11,8 +11,6 @@ const Home = () => {
     const [currentId,setCurrentId] = useState(null);
     const dispatch = useDispatch();
 
-    
-  useEffect(()=>{
     const getAllposts = async ()=>{
       try {
           const resp = await axios.get('https://memories-app-server-4apt.vercel.app/post',{
@@ -27,8 +25,9 @@ const Home = () => {
           console.log(error.message);
       }
     }
+  useEffect(()=>{
     getAllposts()
-  },[dispatch]);
+  },[]);
   return (
     <Grow in>
     <Container>
