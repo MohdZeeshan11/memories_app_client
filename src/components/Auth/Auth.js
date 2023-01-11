@@ -10,8 +10,8 @@ import { gapi } from 'gapi-script';
 import { AUTH } from '../../redux/actionTypes';
 import { useNavigate } from 'react-router-dom';
 import { signin, signup } from '../../redux/actions/auth';
-// clientId = "548511602786-694racptfq824bsdpvmesfjenksl57vq.apps.googleusercontent.com"
-// seceretKey="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"
+// clientId = "484491470581-t9bp5shg17pt8tuh2mi60m44ph2cjajt.apps.googleusercontent.com"
+// seceretKey="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"
 
 const Auth = () => {
     const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
@@ -66,7 +66,7 @@ const Auth = () => {
           gapi.client.init({
             // apiKey: API_KEY,
             // clientId: CLIENT_ID,
-            clientId:'548511602786-694racptfq824bsdpvmesfjenksl57vq.apps.googleusercontent.com',
+            clientId:'484491470581-t9bp5shg17pt8tuh2mi60m44ph2cjajt.apps.googleusercontent.com',
             scope: '',
           });
         }
