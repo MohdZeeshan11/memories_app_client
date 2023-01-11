@@ -66,7 +66,7 @@ const Auth = () => {
           gapi.client.init({
             // apiKey: API_KEY,
             // clientId: CLIENT_ID,
-            clientId:' 548511602786-k0qm1cibhns8p0hd689q1uo10js0mfur.apps.googleusercontent.com',
+            clientId:'548511602786-k0qm1cibhns8p0hd689q1uo10js0mfur.apps.googleusercontent.com',
             scope: '',
           });
         }
