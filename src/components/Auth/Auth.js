@@ -2,7 +2,7 @@ import { Avatar, Button, Container, Grid, Paper, Typography } from '@mui/materia
 import React, { useState } from 'react'
 import Input from './Input';
 import { useStyles } from './styles';
-import { GoogleLogin } from 'react-google-login';
+// import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {useDispatch} from 'react-redux';
 // import Icon from './icon';
