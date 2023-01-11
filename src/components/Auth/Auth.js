@@ -1,13 +1,13 @@
 import { Avatar, Button, Container, Grid, Paper, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Input from './Input';
 import { useStyles } from './styles';
 import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {useDispatch} from 'react-redux';
 // import Icon from './icon';
-import { gapi } from 'gapi-script';
-import { AUTH } from '../../redux/actionTypes';
+// import { gapi } from 'gapi-script';
+// import { AUTH } from '../../redux/actionTypes';
 import { useNavigate } from 'react-router-dom';
 import { signin, signup } from '../../redux/actions/auth';
 // clientId = "484491470581-t9bp5shg17pt8tuh2mi60m44ph2cjajt.apps.googleusercontent.com"
@@ -47,34 +47,34 @@ const Auth = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const googleSuccess = async (res)=>{
-        // console.log('google res = ',res);
-        const user = res?.profileObj;
-        const token = res?.tokenId;
-        try {
-            dispatch({ type: AUTH, payload: { user, token } });
-            navigate('/');
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // const googleSuccess = async (res)=>{
+    //     // console.log('google res = ',res);
+    //     const user = res?.profileObj;
+    //     const token = res?.tokenId;
+    //     try {
+    //         dispatch({ type: AUTH, payload: { user, token } });
+    //         navigate('/');
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
-    const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
+    // const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
 
-    useEffect(() => {
-        function start() {
-          gapi.client.init({
-            // apiKey: API_KEY,
-            // clientId: CLIENT_ID,
-            clientId:'484491470581-t9bp5shg17pt8tuh2mi60m44ph2cjajt.apps.googleusercontent.com',
-            scope: '',
-          });
-        }
-        // console.log('start');
-        gapi.load('client:auth2', start);
-        // const accessToken = gapi?.auth?.getToken()?.access_token;
-        // console.log('google token = ',accessToken);
-      }, []);
+    // useEffect(() => {
+    //     function start() {
+    //       gapi.client.init({
+    //         // apiKey: API_KEY,
+    //         // clientId: CLIENT_ID,
+    //         clientId:'484491470581-t9bp5shg17pt8tuh2mi60m44ph2cjajt.apps.googleusercontent.com',
+    //         scope: '',
+    //       });
+    //     }
+    //     // console.log('start');
+    //     gapi.load('client:auth2', start);
+    //     // const accessToken = gapi?.auth?.getToken()?.access_token;
+    //     // console.log('google token = ',accessToken);
+    //   }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -111,14 +111,14 @@ const Auth = () => {
                     { isSignup ? 'Sign Up' : 'Sign In' }
                 </Button>
                <div style={{display:"flex",justifyContent:'center'}}>
-               <GoogleLogin className={classes.googleButton}
+               {/* <GoogleLogin className={classes.googleButton}
                     clientId='548511602786-k0qm1cibhns8p0hd689q1uo10js0mfur.apps.googleusercontent.com'
                     buttonText='Sign in with Google'
                     onSuccess={googleSuccess}
                     onFailure={googleError}
                     cookiePolicy="single_host_origin"
                     isSigned={true}
-                />
+                /> */}
                </div>
                 <Grid container justify="flex-end" mb={-1} >
                     <Grid item>
