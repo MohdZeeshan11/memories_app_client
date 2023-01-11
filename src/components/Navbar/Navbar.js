@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AppBar, Avatar, Button, Toolbar,Box, Typography } from '@mui/material';
+import { AppBar, Avatar, Button, Toolbar,Box, Typography, Tooltip } from '@mui/material';
 import Logo from '../../assets/memories.jpeg';
 import { useLocation, useNavigate,Link } from 'react-router-dom';
 import { useStyles } from './styles';
@@ -43,6 +43,8 @@ const Navbar = () => {
       <Toolbar className={classes.toolbar} sx={{marginRight:{xs:'-40px'}}}>
         {user?.result ? (
           <div className={classes.profile}>
+           
+            <Tooltip title="LogOut" arrow>
             <Avatar 
               className={classes.purple} 
               alt={user?.result.name} 
@@ -51,6 +53,7 @@ const Navbar = () => {
               style={{cursor:"pointer"}}
               
             >{user?.result.name.charAt(0)}</Avatar>
+            </Tooltip>
            <Box ml={1}  sx={{ display: { xs: 'none', sm: 'block' } }}>
            <Typography className={classes.userName} variant="h6"  mt={-1} >{user?.result?.name}</Typography>
            <Typography className={classes.userName} variant="p" mt={-1}>{user?.result?.email}</Typography>
