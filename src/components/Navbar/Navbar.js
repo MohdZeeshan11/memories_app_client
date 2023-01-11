@@ -17,7 +17,7 @@ const Navbar = () => {
 
     const logout = () => {
         dispatch({ type: LOGOUT });
-        navigate('/auth');
+        navigate('/');
         setUser(null);
     };
 
@@ -35,7 +35,8 @@ const Navbar = () => {
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
-        <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center" sx={{fontSize:{xs:'28px',md:'50px'},marginLeft:{xs:'-15px'}}}>Memories</Typography>
+        {/* <Typography component={Link} to="/home" className={classes.heading} variant="h2" align="center" sx={{fontSize:{xs:'28px',md:'50px'},marginLeft:{xs:'-15px'}}}>Memories</Typography> */}
+        <Typography className={classes.heading} variant="h2" align="center" sx={{fontSize:{xs:'28px',md:'50px'},marginLeft:{xs:'-15px'}}}>Memories</Typography>
         <Box ml={1}  sx={{ display: { xs: 'none', sm: 'block' } }}>
         <img className={classes.image} src={Logo} alt="icon" height="60"  />
         </Box>
@@ -61,7 +62,7 @@ const Navbar = () => {
             {/* <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button> */}
           </div>
         ) : (
-          <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+          <Button component={Link} to="/" variant="contained" color="primary">Sign In</Button>
         )}
       </Toolbar>
     </AppBar>
