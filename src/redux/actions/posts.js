@@ -11,6 +11,7 @@ export const getPosts = () => async (dispatch) => {
     dispatch({ type: GET_ALL_POSTS, payload: data });
   } catch (error) {
     console.log(error);
+    alert('user is not authorized');
   }
 };
 

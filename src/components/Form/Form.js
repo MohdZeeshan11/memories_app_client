@@ -25,7 +25,7 @@ const Form = ({currentId,setCurrentId}) => {
     
       const clear = () => {
         setCurrentId(0);
-        setPostData({ title: '', message: '', tags: '', selectedFile: '' });
+        setPostData({ creator:'', title: '', message: '', tags: '', selectedFile: '' });
       };
     
       const handleSubmit = async (e) => {
