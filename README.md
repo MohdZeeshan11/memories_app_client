@@ -1,3 +1,7 @@
+memories_app_server_repo
+https://github.com/MohdZeeshan11/memories_App_server.git
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
